@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: #0b2545;
+  --color-blue: #1f5fbf;
+  --color-blue-hover: #184c99;
+  --color-ice: #eef4fb;
+  --color-ice-2: #e3ecf8;
+  --color-line: #dce4ee;
+  --color-slate: #55657a;
+  --color-slot: #e8f0fc;
+  --color-slot-border: #bcd0f0;
+  /* Green is reserved for "Online" and "Open". */
+  --color-ok: #1e9e68;
+  --color-ok-bright: #4ade9a;
+  /* Red accent, used only on the emergency card and form errors */
+  --color-alert: #b8483e;
+  /* Soft navy tint for text on navy backgrounds */
+  --color-mist: #b9c8dd;
+
+  --font-sans: var(--font-manrope);
+
+  /* The reference layout switches to one column below 900px. */
+  --breakpoint-desk: 56.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  background: #ffffff;
+  scroll-behavior: smooth;
+
+  /* Heights the layout sizes itself against. */
+  --topbar-h: 38px;
+  --header-h: 64px;
+  /* Space above and below the hero: equal, and smaller on short windows so
+     the hero fits the first view. */
+  --hero-pad: clamp(28px, 5svh, 56px);
+}
+
+@media (min-width: 56.25rem) {
+  html {
+    --header-h: 76px;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-navy);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-slot);
+  color: var(--color-navy);
+}
+
+/* Text fields draw their own focus ring, so this covers everything else. */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Clear the sticky header when jumping to a section. */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
